@@ -1,11 +1,47 @@
 class Solution {
-    public int mySqrt(int x) {
-       long i;
-       for(i = 1; i <= x; i++){
-            if(i*i > x){
-                return (int)i-1;
+    public int mySqrt(int x) { //optimized code 
+                                                    //TC (Time Complexity): O(log x)
+                                                    // Base case: if x is 0 or 1, sqrt is x itself
+        if (x < 2) {
+            return x;
+        }
+
+        int ans = 0;    // to store the best (floor) sqrt value
+        int start = 1;      // smallest possible sqrt for x >= 2
+        int end = x / 2;        // largest possible sqrt
+
+        // Binary search loop
+        while (start <= end) {
+
+            int mid = start + (end - start) / 2;
+            long sq = (long) mid * mid;   //used to overcome integer overflow
+
+            if (sq == x) {
+                return mid;         //perfect square found return 
+            } else if (sq < x) {
+                ans = mid;          // store possible answer
+                start = mid + 1;    // search in right half
+            } else {
+                end = mid - 1;       //search in left half
             }
-       }
-        return (int)i-1;
+        }
+        // Return the stored floor sqrt value
+        return ans;
     }
 }
+
+
+
+//timecomplexity of below code is very high coz it goes from 1 to x
+
+// class Solution {
+//     public int mySqrt(int x) {
+//        long i;
+//        for(i = 1; i <= x; i++){
+//             if(i*i > x){
+//                 return (int)i-1;
+//             }
+//        }
+//         return (int)i-1;
+//     }
+// }

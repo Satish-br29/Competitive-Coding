@@ -1,0 +1,41 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+     if(num<2){
+        return true;
+     }
+
+     int low = 2;  
+     int high = num/2;
+
+     while(low <= high){
+        int mid = low+(high-low)/2;
+        long sqr = (long) mid*mid;
+        if(sqr == num){
+            return true;
+        }
+        else if(sqr < num){
+            low = mid+1;
+        }
+        else{
+            high = mid-1;
+        }
+    }
+    return false;
+    }
+}
+
+
+
+//timecomplexity will be very high for this below code
+
+// class Solution {
+//     public boolean isPerfectSquare(int num) {
+//         long i ;
+//         for(i = 1;i<=num;i++){
+//             if(i*i==num){
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+// }

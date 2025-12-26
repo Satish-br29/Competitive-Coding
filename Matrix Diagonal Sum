@@ -1,0 +1,23 @@
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        int n = mat.length;
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {        //rows
+            for (int j = 0; j < n; j++) {        //cols
+                if (i == j) {       //check if rows==cols then add it to primary diagonal
+                    sum += mat[i][j];
+                }
+                //for secondary diagonal if (rows+cols)index == sizeofMat-1 then add 
+                if (i + j == n - 1) {
+                    sum += mat[i][j];
+                }
+            }
+        }
+        //for entire matrix you have to subtract only once middle value for odd size matrix because it was added two times while summing both diagonal so you have to add only once that's why we subtract once middle value
+        if (n % 2 == 1) {
+            sum -= mat[n / 2][n / 2]; // this n/2 gives you exact mid value of matrix for odd n.
+        }
+        return sum;  //return final sum
+    }
+}

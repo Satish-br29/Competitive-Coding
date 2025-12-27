@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        Set<List<Integer>> s = new HashSet<>();  //uses hashSet for uniquness element 
+        List<List<Integer>> ans = new ArrayList<>();  //uses list for final ans return but before that we take all set value into list in the form of list of list...
+        Arrays.sort(nums);   //sort the arr
+
+        for (int i = 0; i < nums.length; i++) {
+            int left = i + 1;   //left at next to i values
+            int right = nums.length - 1;   //right at last idx of array 
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+                    s.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    left++;
+                    right--;
+                } else if (sum < 0) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        ans.addAll(s);   //addAll(set_values) into ans ArrayList of List that matches the return types
+        return ans;   //return that ans ArrayList of List
+    }
+}
